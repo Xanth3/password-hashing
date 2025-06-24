@@ -230,12 +230,9 @@ namespace Password.Hashing
 
         private byte[] GenerateSalt()
         {
-            using (var rng = new RNGCryptoServiceProvider())
-            {
-                var salt = new byte[_saltLength];
-                rng.GetBytes(salt);
-                return salt;
-            }
+            var salt = new byte[_saltLength];
+            RandomNumberGenerator.Fill(salt);
+            return salt;
         }
     }
 }
