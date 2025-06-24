@@ -2,8 +2,6 @@
 
 Provides a common password hashing implementation with friendly setup options. The library can be included as a NuGet package or directly as a DLL.
 
-The library is provided for both `netstandard2.0` and `net462` platforms.
-
 ## Usage
 
 The key object is the `PasswordHasher` class. This can be instantiated either per-request or as a shared object; it stores no state other than its configuration, and is immutable. The public API consists of two methods:
@@ -65,7 +63,7 @@ Note that the options which you select will affect the hashes that are produced 
 Argon2 allows you to use a well-known "secret" to provide an extra layer of security to hashes. This secret is an array of bytes; where it comes from is up to developers, whether that's a constant value or something that's loaded from an external resource. To use it, you just need to provide it in the constructor:
 
 ```csharp
-var secret = System.Text.Encoding.UTF8.GetBytes("swordfish");
+var secret = System.Text.Encoding.UTF8.GetBytes("anteater");
 
 var hasher = new PasswordHasher(knownSecret: secret);
 ```
