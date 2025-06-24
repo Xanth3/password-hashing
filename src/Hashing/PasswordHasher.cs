@@ -231,8 +231,15 @@ namespace Password.Hashing
         private byte[] GenerateSalt()
         {
             var salt = new byte[_saltLength];
-            RandomNumberGenerator.Fill(salt);
-            return salt;
+            #if NET6_0_OR_GREATER || NET8_0_OR_GREATER
+                        RandomNumberGenerator.Fill(salt);
+            #else
+                        using (var rng = RandomNumberGenerator.Create())
+                        {
+                            rng.GetBytes(salt);
+                        }
+            #endif
+                        return salt;
         }
     }
 }
